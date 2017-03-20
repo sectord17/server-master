@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
-BIN_PATH="$( dirname $( realpath "${0}" ) )"
-PROVISION_PATH="$( realpath "${BIN_PATH}/provision" )"
-PROJECT_PATH="$( realpath "${BIN_PATH}/.." )"
+# Update
+sudo apt update
+sudo apt upgrade -y
 
-cp "${PROJECT_PATH}/.env.example" "${PROJECT_PATH}/.env"
-source "${PROJECT_PATH}/.env"
+# Locale
+sudo apt install -y software-properties-common language-pack-en zip unzip
+echo "LC_ALL=en_US.UTF-8" | sudo tee /etc/default/locale
+sudo update-locale LANG=en_US.UTF-8
 
-. ${PROVISION_PATH}/system.sh
+# Timezone
+echo 'UTC' | sudo tee /etc/timezone
+sudo dpkg-reconfigure -f noninteractive tzdata
 
-cd ${PROJECT_PATH}
-. ${PROVISION_PATH}/project.sh
+# Packages
+sudo apt install supervisor
+
+# JS
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt install -y nodejs build-essential
+
+sudo apt autoremove -y

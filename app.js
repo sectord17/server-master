@@ -1,6 +1,6 @@
 let express = require('express');
 let path = require('path');
-let logger = require('morgan');
+let logger = require('winston');
 let bodyParser = require('body-parser');
 
 let index = require('./routes/index');
