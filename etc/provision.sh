@@ -14,7 +14,7 @@ echo 'UTC' | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
 # Packages
-sudo apt install supervisor
+sudo apt install -y supervisor
 
 # JS
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -

@@ -1,11 +1,14 @@
+let process = require('process');
 let express = require('express');
 let path = require('path');
-let logger = require('winston');
+let logger = require('morgan');
 let bodyParser = require('body-parser');
 
 let index = require('./routes/index');
 
 let app = express();
+
+process.title = 'sectord17-server-master';
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
