@@ -13,6 +13,12 @@ if (process.env.SENTRY_DSN) {
     raven.config(process.env.SENTRY_DSN).install();
 }
 
+app.debug = function (message) {
+    if (process.env.APP_DEBUG) {
+        console.log(message);
+    }
+};
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
