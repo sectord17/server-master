@@ -4,11 +4,8 @@ let process = require('process'),
     raven = require('raven'),
     path = require('path'),
     logger = require('morgan'),
-    bodyParser = require('body-parser');
-
-let index = require('./routes/index');
-
-let app = express();
+    bodyParser = require('body-parser'),
+    app = express();
 
 env(__dirname + '/.env');
 
@@ -20,7 +17,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/', index);
+require('./lib')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -37,7 +34,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.send(null)
 });
 
 module.exports = app;
