@@ -32,6 +32,10 @@ app.use(function (err, req, res, next) {
         status = 404;
     }
 
+    if (status === 500) {
+        raven.captureException(err);
+    }
+
     res.sendStatus(status);
 });
 
