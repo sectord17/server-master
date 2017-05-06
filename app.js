@@ -5,6 +5,7 @@ let process = require('process'),
     path = require('path'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
+    BasicError = require('./lib/errors/basic-error'),
     app = express();
 
 env(__dirname + '/.env');
@@ -25,18 +26,22 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-app.use(function (err, req, res, next) {
-    let status = err.status || 500;
-
-    if (err.message === "model-not-found") {
-        status = 404;
+app.use(function (error, request, response, next) {
+    if (error instanceof BasicError) {
+        return response.status(403).send(error);
     }
 
-    if (status === 500) {
-        raven.captureException(err);
+    if (error.message === "model-not-found") {
+        return response.sendStatus(404);
     }
 
-    res.sendStatus(status);
+    let status = error.status || 500;
+
+    if (status === 500 && process.env.SENTRY_DSN) {
+        raven.captureException(error);
+    }
+
+    response.sendStatus(status);
 });
 
 module.exports = app;
