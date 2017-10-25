@@ -2,7 +2,7 @@
 Description=Sector D-17: Server Master
 
 [Service]
-ExecStart=/usr/bin/nodejs /home/sectord17/server-master/bin/www
+ExecStart=/usr/bin/nodejs /home/sectord17/server-master/app.js
 Restart=always
 User=sectord17
 Group=sectord17
