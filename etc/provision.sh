@@ -13,11 +13,8 @@ sudo update-locale LANG=en_US.UTF-8
 echo 'UTC' | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
-# Packages
-sudo apt install -y supervisor
-
 # JS
-curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y nodejs build-essential
 
 sudo apt autoremove -y
