@@ -1,10 +1,10 @@
 const express = require('express');
 const debug = require('debug')('sectord17-master:routes-info');
-const ModelNotFoundError = include('/lib/errors/model-not-found-error');
+const ModelNotFoundError = include('/src/errors/model-not-found-error');
 const {getValidEnv} = require('../../utils');
 
 module.exports = () => {
-    const {gameManager} = include('/lib');
+    const {gameManager} = include('/src');
     const router = express.Router();
 
     // Authorize every request

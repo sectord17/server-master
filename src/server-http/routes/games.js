@@ -1,10 +1,10 @@
 const express = require('express');
 const {check, validationResult} = require('express-validator/check');
-const transformGame = include('/lib/transformers/game-transformer');
-const transformGameBasic = include('/lib/transformers/basic-game-transformer');
+const transformGame = include('/src/transformers/game-transformer');
+const transformGameBasic = include('/src/transformers/basic-game-transformer');
 
 module.exports = () => {
-    const {gameManager} = include('/lib');
+    const {gameManager} = include('/src');
     const router = express.Router();
 
     /**

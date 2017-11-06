@@ -1,6 +1,6 @@
 const axios = require('axios');
 const debug = require('debug')('sectord17-master:slave-sdk');
-const BasicError = include('/lib/errors/basic-error');
+const BasicError = include('/src/errors/basic-error');
 
 module.exports = exports = class SlaveSDK {
     constructor(url, token) {

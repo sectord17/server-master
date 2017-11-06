@@ -1,8 +1,8 @@
 const debug = require('debug')('sectord17-master:game-manager');
 const winston = require('winston');
 const Game = require('./game');
-const SlaveSDK = include('/lib/sdk/slave-sdk');
-const ModelNotFoundError = include('/lib/errors/model-not-found-error');
+const SlaveSDK = include('/src/sdk/slave-sdk');
+const ModelNotFoundError = include('/src/errors/model-not-found-error');
 
 module.exports = exports = class GameManager {
     constructor(slaveUrl, slaveToken) {

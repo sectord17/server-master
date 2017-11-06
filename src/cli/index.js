@@ -1,5 +1,5 @@
 const readline = require('readline');
-const {gameManager} = include('/lib');
+const {gameManager} = include('/src');
 const reporter = require('../errors/reporter');
 
 const rl = readline.createInterface({
