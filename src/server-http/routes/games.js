@@ -115,7 +115,7 @@ module.exports = () => {
      *      }
      */
     router.post('/:gameId/decision', (request, response, next) => {
-        const gameId = request.params.gameId;
+        const gameId = parseInt(request.params.gameId);
 
         gameManager
             .decide(gameId)
