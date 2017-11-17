@@ -7,6 +7,7 @@ const report = include('/src/errors/reporter');
 const BasicError = include('/src/errors/basic-error');
 const ModelNotFoundError = include('/src/errors/model-not-found-error');
 const EndpointNotFoundError = include('/src/errors/endpoint-not-found-error');
+const ValidationError = include('/src/errors/validation-error');
 
 module.exports = exports = class ServerHTTP {
     constructor(port) {
@@ -40,6 +41,10 @@ module.exports = exports = class ServerHTTP {
 
         if (error instanceof BasicError) {
             return response.status(403).send(error);
+        }
+
+        if (error instanceof ValidationError) {
+            return response.status(422).send({errors: error.errors});
         }
 
         report(error);

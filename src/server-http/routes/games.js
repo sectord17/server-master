@@ -2,6 +2,7 @@ const express = require('express');
 const {check, validationResult} = require('express-validator/check');
 const transformGame = include('/src/transformers/game-transformer');
 const transformGameBasic = include('/src/transformers/basic-game-transformer');
+const ValidationError = include('/src/errors/validation-error');
 
 module.exports = () => {
     const {gameManager} = include('/src');
@@ -72,7 +73,7 @@ module.exports = () => {
         (request, response, next) => {
             const errors = validationResult(request);
             if (!errors.isEmpty()) {
-                return response.status(422).json({errors: errors.mapped()});
+                throw new ValidationError(errors.mapped());
             }
 
             const gameName = request.body.name;
