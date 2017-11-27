@@ -3,9 +3,12 @@ const winston = require('winston');
 const Game = require('./game');
 const SlaveSDK = include('/src/sdk/slave-sdk');
 const ModelNotFoundError = include('/src/errors/model-not-found-error');
+const BasicError = include('/src/errors/basic-error');
 
 module.exports = exports = class GameManager {
     constructor(slaveUrl, slaveToken) {
+        this.MAX_GAMES_PER_SLAVE = 5;
+
         /** @type {Map.<int, Game>} */
         this.games = new Map();
         this.gamesCounter = 0;
@@ -24,6 +27,10 @@ module.exports = exports = class GameManager {
      * @returns {Promise.<Game>}
      */
     create(name) {
+        if (this.gamesCounter >= this.MAX_GAMES_PER_SLAVE) {
+            throw new BasicError('games-limit');
+        }
+
         const id = ++this.gamesCounter;
 
         return this.slaveSDK
