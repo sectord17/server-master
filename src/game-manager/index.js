@@ -27,7 +27,7 @@ module.exports = exports = class GameManager {
      * @returns {Promise.<Game>}
      */
     create(name) {
-        if (this.gamesCounter >= this.MAX_GAMES_PER_SLAVE) {
+        if (this.games.size >= this.MAX_GAMES_PER_SLAVE) {
             throw new BasicError('games-limit');
         }
 
