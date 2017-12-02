@@ -102,8 +102,7 @@ module.exports = exports = class GameManager {
     }
 
     syncGames(games) {
-        let dictionary = new Map();
-
+        const dictionary = new Map();
         games.forEach(slaveGame => dictionary.set(slaveGame.id, slaveGame));
 
         // Remove
@@ -113,14 +112,19 @@ module.exports = exports = class GameManager {
 
         // Update
         this.games
-            .forEach(game => game.playersCount = dictionary.get(game.id).players_count);
+            .forEach(game => {
+                const slaveGame = dictionary.get(game.id);
+                game.setPlayersCount(slaveGame.players_count);
+                game.setStatus(slaveGame.status);
+            });
 
         // Create
         games
             .filter(slaveGame => !this.games.has(slaveGame.id))
-            .forEach(({id, name, ip, port, players_count}) => {
+            .forEach(({id, name, ip, port, players_count, status}) => {
                 const game = this.onCreate(id, name, ip, port);
                 game.setPlayersCount(players_count);
+                game.setStatus(status);
             });
     }
 };

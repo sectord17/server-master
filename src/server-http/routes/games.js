@@ -22,12 +22,14 @@ module.exports = () => {
      *          {
      *              id: 1,
      *              name: 'Test',
-     *              players_count: 1
+     *              players_count: 1,
+     *              status: 0
      *          },
      *          {
      *              id: 2,
      *              name: 'Example',
-     *              players_count: 8
+     *              players_count: 8,
+     *              status: 1
      *          }
      *      ]
      */

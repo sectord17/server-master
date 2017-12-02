@@ -6,5 +6,6 @@ module.exports = game => {
         id: game.id,
         name: game.name,
         players_count: game.playersCount,
+        status: game.status
     };
 };

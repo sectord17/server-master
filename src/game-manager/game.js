@@ -6,10 +6,15 @@ module.exports = exports = class Game {
         /* Game port */
         this.port = parseInt(port);
         this.playersCount = 0;
+        this.status = 0;
     }
 
     setPlayersCount(count) {
         this.playersCount = parseInt(count);
+    }
+
+    setStatus(status) {
+        this.status = parseInt(status);
     }
 
     getInlineDetails() {
