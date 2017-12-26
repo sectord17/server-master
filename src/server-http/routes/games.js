@@ -1,7 +1,7 @@
 const express = require('express');
 const {check, validationResult} = require('express-validator/check');
-const transformGame = include('/src/transformers/game-transformer');
 const transformGameBasic = include('/src/transformers/basic-game-transformer');
+const transformGameSafe = include('/src/transformers/safe-game-transformer');
 const ValidationError = include('/src/errors/validation-error');
 
 module.exports = () => {
@@ -34,9 +34,7 @@ module.exports = () => {
      *      ]
      */
     router.get('/', (req, res) => {
-        const games = gameManager.all()
-            .map(game => transformGameBasic(game));
-
+        const games = gameManager.all().map(game => transformGameSafe(game));
         res.send(games);
     });
 
@@ -85,7 +83,7 @@ module.exports = () => {
                 .then(game => gameManager.decide(game.id))
                 .then(([token, game]) => response.send({
                     token: token,
-                    game: transformGame(game)
+                    game: transformGameBasic(game)
                 }))
                 .catch(error => next(error));
         }
@@ -124,7 +122,7 @@ module.exports = () => {
             .decide(gameId)
             .then(([token, game]) => response.send({
                 token: token,
-                game: transformGame(game)
+                game: transformGameBasic(game)
             }))
             .catch(error => next(error));
     });

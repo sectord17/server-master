@@ -1,5 +1,6 @@
 const express = require('express');
 const {getValidEnv} = require('../../utils');
+const transformGame = include('/src/transformers/game-transformer');
 
 module.exports = () => {
     const {gameManager} = include('/src');
@@ -14,6 +15,12 @@ module.exports = () => {
 
         return next();
     });
+
+    router.get('/games', (request, response) => {
+        const games = gameManager.all().map(game => transformGame(game));
+        response.send(games);
+    });
+
 
     router.delete('/games/:gameId', (request, response, next) => {
         const gameId = request.params.gameId;
