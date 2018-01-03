@@ -17,12 +17,12 @@ module.exports = () => {
     });
 
     /**
-     * @api {get} /games Get list of games
+     * @api {get} /admin/games Get list of games
      * @apiVersion 0.0.1
      * @apiGroup Admin
      *
      * @apiExample {json} Request:
-     *      GET /games
+     *      GET /admin/games
      *
      * @apiSuccessExample Success-Response:
      *      HTTP/1.1 200 OK
@@ -51,12 +51,12 @@ module.exports = () => {
     });
 
     /**
-     * @api {delete} /games/:game Shutdown the game
+     * @api {delete} /admin/games/:game Shutdown the game
      * @apiVersion 0.0.1
      * @apiGroup Admin
      *
      * @apiExample {json} Request:
-     *      DELETE /games/1
+     *      DELETE /admin/games/1
      *
      * @apiSuccessExample Success-Response:
      *      HTTP/1.1 200 OK
