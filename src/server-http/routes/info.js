@@ -17,6 +17,17 @@ module.exports = () => {
         return next();
     });
 
+    /**
+     * @api {post} /info/games/:game/shutdown Inform about game shutdown
+     * @apiVersion 0.0.1
+     * @apiGroup Internal
+     *
+     * @apiExample {json} Request:
+     *      POST /info/games/1/shutdown
+     *
+     * @apiSuccessExample Success-Response:
+     *      HTTP/1.1 200 OK
+     */
     router.post('/games/:gameId/shutdown', (request, response) => {
         const gameId = parseInt(request.params.gameId);
 

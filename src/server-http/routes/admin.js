@@ -16,12 +16,51 @@ module.exports = () => {
         return next();
     });
 
+    /**
+     * @api {get} /games Get list of games
+     * @apiVersion 0.0.1
+     * @apiGroup Admin
+     *
+     * @apiExample {json} Request:
+     *      GET /games
+     *
+     * @apiSuccessExample Success-Response:
+     *      HTTP/1.1 200 OK
+     *      [
+     *          {
+     *              id: 1,
+     *              name: 'Test',
+     *              ip: '192.0.2.1',
+     *              port: 3000
+     *              players_count: 1,
+     *              status: 0
+     *          },
+     *          {
+     *              id: 2,
+     *              name: 'Example',
+     *              ip: '192.0.2.2',
+     *              port: 2000
+     *              players_count: 8,
+     *              status: 1
+     *          }
+     *      ]
+     */
     router.get('/games', (request, response) => {
         const games = gameManager.all().map(game => transformGame(game));
         response.send(games);
     });
 
-
+    /**
+     * @api {delete} /games/:game Shutdown the game
+     * @apiVersion 0.0.1
+     * @apiGroup Admin
+     *
+     * @apiExample {json} Request:
+     *      DELETE /games/1
+     *
+     * @apiSuccessExample Success-Response:
+     *      HTTP/1.1 200 OK
+     */
     router.delete('/games/:gameId', (request, response, next) => {
         const gameId = request.params.gameId;
 
